@@ -58,34 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// 移动端菜单控制
-var btnMobileMenu = document.querySelector('.btn-mobile-menu__icon');
-var navigationWrapper = document.querySelector('.navigation-wrapper');
-
-if (btnMobileMenu && navigationWrapper) {
-    btnMobileMenu.addEventListener('click', function () {
-        if (navigationWrapper.style.display === "block") {
-            // 隐藏导航菜单
-            navigationWrapper.classList.remove('bounceInDown');
-            navigationWrapper.classList.add('bounceOutUp');
-            
-            navigationWrapper.addEventListener('animationend', function handler() {
-                navigationWrapper.classList.remove('visible', 'animated', 'bounceOutUp');
-                navigationWrapper.style.display = "none";
-                navigationWrapper.removeEventListener('animationend', handler);
-            });
-        } else {
-            // 显示导航菜单
-            navigationWrapper.style.display = "block";
-            navigationWrapper.classList.add('visible', 'animated', 'bounceInDown');
-        }
-        
-        // 切换菜单图标
-        btnMobileMenu.classList.toggle('ri-menu-line');
-        btnMobileMenu.classList.toggle('ri-close-line');
-    });
-}
-
 // 微信模态框功能
 function showWeChatModal() {
     const modal = document.getElementById('wechatModal');
