@@ -1,0 +1,475 @@
+/* 精简版style.css - 保留核心样式，移除冗余代码 */
+
+/* 基础样式重置 */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", 
+                "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", 
+                "WenQuanYi Micro Hei", sans-serif;
+    font-size: 1em;
+    color: #666;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 链接样式 */
+a {
+    text-decoration: none;
+    color: #4e97d8;
+    transition: color 0.5s;
+}
+
+a:hover {
+    color: #4e97d8;
+}
+
+/* 头像和圆形效果 - 修复悬停效果 */
+.ih-item.circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.ih-item.circle .img {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    transition: all 0.5s ease-in-out;
+    z-index: 11;
+}
+
+.ih-item.circle .img img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.ih-item.circle .info {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.ih-item.circle .info .info-back {
+    opacity: 1;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ih-item.circle .info h2 {
+    color: #fff;
+    font-size: 18px;
+    margin: 0;
+    padding-top: 20px;
+}
+
+.ih-item.circle .info p {
+    color: #bbb;
+    font-style: italic;
+    font-size: 10px;
+    margin: 0;
+}
+
+/* 头像悬停动画效果 */
+.ih-item.circle.effect.right_to_left .img {
+    transform-origin: 0% 50%;
+}
+
+.ih-item.circle.effect.right_to_left a:hover .img {
+    transform: rotate3d(0, 1, 0, -180deg);
+}
+
+/* 个人资料图片样式 */
+.profilepic {
+    text-align: center;
+    display: block;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 0px 2px 20px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: #88acdb;
+    transition: all 0.2s ease-in;
+}
+
+/* 动画类 */
+.animated {
+    animation-fill-mode: both;
+    animation-duration: 1s;
+}
+
+.iUp {
+    opacity: 0;
+    transform: translate3d(0, 80px, 0);
+    transition: all 2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.iUp.up {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+/* 从下方淡入 */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeInUp {
+    animation-name: fadeInUp;
+}
+
+/* 面板样式 */
+.panel {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.panel__vertical {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.panel-title {
+    font-family: "Old English Text MT", "Engravers' Old English BT", "Lato", 
+                "PingFang SC", "Microsoft YaHei", sans-serif;
+    margin: 0 0 5px 0;
+    font-size: 2.5em;
+    color: #fff;
+}
+
+.panel-subtitle {
+    font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Lucida Grande", 
+                "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", 
+                "WenQuanYi Micro Hei", sans-serif;
+    font-size: 1.2em;
+    font-weight: lighter;
+    letter-spacing: 3px;
+    color: #ccc;
+}
+
+/* 封面样式 */
+.panel-cover {
+    display: block;
+    position: fixed;
+    z-index: 900;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    background: center center no-repeat #666;
+    user-select: none;
+    transform: translate3d(0, 0, 0);
+    transition: width 0.6s ease;
+}
+
+.panel-cover--collapsed {
+    width: 30%;
+}
+
+.panel-cover--overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    z-index: 1;
+    opacity: 0.55;
+}
+
+.panel-main {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.panel-main__inner {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    z-index: 800;
+    padding: 0 60px;
+}
+
+.panel-main__content {
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.panel-inverted {
+    font-weight: 100;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.panel-inverted a {
+    color: #fff;
+}
+
+/* 封面描述 */
+.panel-cover__description {
+    margin: 0 30px;
+}
+
+.panel-cover__divider {
+    width: 50%;
+    margin: 20px auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* 导航样式*/
+.navigation-wrapper {
+    margin-top: 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-primary {
+    margin-bottom: 20px;
+}
+
+.nav-social {
+    margin-top: 10px;
+}
+
+.navigation {
+    display: inline-block;
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+}
+
+.navigation__item {
+    display: inline-block;
+    margin: 0 5px;
+    line-height: 1em;
+}
+
+.navigation__item a {
+    display: block;
+    position: relative;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #fff;
+    opacity: 0.8;
+    font-size: 0.9em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.navigation__item a:hover {
+    opacity: 1;
+}
+
+/* 社交导航 */
+.navigation--social a {
+    border: 0;
+    padding: 6px 8px;
+}
+
+.navigation--social a .label {
+    display: none;
+}
+
+.navigation--social a i {
+    display: block;
+    font-size: 1.7em;
+}
+
+/* 移动端菜单按钮 */
+.btn-mobile-menu {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    background: rgba(51, 51, 51, 0.98);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.btn-mobile-menu__icon,
+.btn-mobile-close__icon {
+    position: relative;
+    top: 10px;
+    color: #fff;
+}
+
+/* 页脚信息 */
+.remark {
+    position: absolute;
+    z-index: 900;
+    bottom: 0;
+    right: 5px;
+    text-align: center;
+    color: #fff;
+    opacity: 0.6 !important;
+    padding-bottom: 3px;
+    padding-right: 18px;
+    letter-spacing: -3px;
+    font-size: 0;
+}
+
+.power {
+    display: inline-block;
+    color: #fff !important;
+    letter-spacing: 0;
+    font-size: 10px;
+    line-height: 16px;
+    margin: 0;
+    vertical-align: middle;
+}
+
+/* 响应式设计 */
+@media all and (max-width: 1100px) {
+    .panel-title {
+        font-size: 2em;
+    }
+    
+    .panel-subtitle {
+        font-size: 1em;
+    }
+    
+    .panel-cover__description {
+        margin: 0 10px;
+        font-size: 0.9em;
+    }
+}
+
+@media all and (max-width: 960px) {
+    .btn-mobile-menu {
+        display: block;
+    }
+    
+    .panel-main__inner {
+        padding: 60px 10%;
+    }
+    
+    .navigation-wrapper {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 0;
+        background: rgba(51, 51, 51, 0.98);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        flex-direction: column;
+    }
+    
+    .navigation-wrapper.visible {
+        display: flex;
+    }
+    
+    .cover-navigation {
+        display: block;
+        position: relative;
+        float: left;
+        clear: left;
+        width: 100%;
+    }
+    
+    .cover-navigation .navigation {
+        display: block;
+        width: 100%;
+    }
+    
+    .cover-navigation .navigation li {
+        width: 80%;
+        margin-bottom: 0.4em;
+    }
+    
+    .cover-navigation.navigation--social .navigation li {
+        display: inline-block;
+        width: 20%;
+    }
+    
+    .remark {
+        display: none;
+    }
+}
+
+@media all and (max-width: 340px) {
+    .panel-main__inner {
+        padding: 0 5%;
+    }
+    
+    .panel-title {
+        margin-bottom: 0.1em;
+        font-size: 1.5em;
+    }
+    
+    .panel-subtitle {
+        font-size: 0.9em;
+    }
+}
+
+/* 紫色主题优化 */
+.panel-cover {
+    background-color: #7e3ebe !important;
+    background-image: none !important;
+}
+
+/* 移动端头像大小调整 */
+@media all and (max-width: 780px) {
+    .ih-item.circle .img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .ih-item.circle {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .profilepic {
+        width: 100px;
+        height: 100px;
+    }
+}
